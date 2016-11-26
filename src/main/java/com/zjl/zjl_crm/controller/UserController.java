@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.zjl.zjl_base.ResultInfo;
-import com.zjl.zjl_base.exception.ParamException;
 import com.zjl.zjl_crm.constant.Constant;
 import com.zjl.zjl_crm.model.User;
 import com.zjl.zjl_crm.service.UserService;
@@ -38,12 +37,14 @@ public class UserController {
 	@RequestMapping(value = "login", method = RequestMethod.POST)
 	@ResponseBody
 	public ResultInfo login(String userName, String password, String roleName) {
-		try {
+		/*try {
 			UserLoginIdentity result = userService.login(userName, password, roleName);
 			return new ResultInfo(result);
 		} catch (ParamException e) {
 			return new ResultInfo(Constant.RESULT_ERROR, e.getMessage());
-		}
+		}*/
+		UserLoginIdentity result = userService.login(userName, password, roleName);
+		return new ResultInfo(result);
 		
 	}
 	
@@ -51,14 +52,18 @@ public class UserController {
 	@ResponseBody
 	public ResultInfo updatePassword(String oldPassword, String newPassword, 
 			String confirmPassword, HttpServletRequest request) {
-		try {
+		/*try {
 			Integer userId = LoginUserUtil.loadUserIdFromCookie(request);
 			userService.updatePassword(oldPassword, newPassword, 
 					confirmPassword, userId);
 			return new ResultInfo(Constant.OPT_SUCCESS);
 		} catch (ParamException e) {
 			return new ResultInfo(Constant.RESULT_ERROR, e.getMessage());
-		}
+		}*/
+		Integer userId = LoginUserUtil.loadUserIdFromCookie(request);
+		userService.updatePassword(oldPassword, newPassword, 
+				confirmPassword, userId);
+		return new ResultInfo(Constant.OPT_SUCCESS);
 		
 	}
 	@RequestMapping("find_customer_manager")

@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.zjl.zjl_base.ResultInfo;
-import com.zjl.zjl_base.exception.ParamException;
 import com.zjl.zjl_crm.constant.Constant;
 import com.zjl.zjl_crm.model.SaleChance;
 import com.zjl.zjl_crm.query.SaleChanceQuery;

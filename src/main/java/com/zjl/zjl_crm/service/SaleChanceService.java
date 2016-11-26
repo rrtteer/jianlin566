@@ -18,6 +18,7 @@ import com.zjl.zjl_crm.constant.SaleChanceState;
 import com.zjl.zjl_crm.dao.SaleChanceDao;
 import com.zjl.zjl_crm.model.SaleChance;
 import com.zjl.zjl_crm.query.SaleChanceQuery;
+import com.zjl.zjl_crm.util.AssertUtil;
 
 
 @Service
@@ -55,10 +56,11 @@ public class SaleChanceService {
 		if(customerId==null||customerId<1){
 			throw new ParamException("请选择客户");
 		}
-		String customerName=saleChance.getCustomerName();	
-		if(StringUtils.isBlank(customerName)){
+		String customerName=saleChance.getCustomerName();
+		/*if(StringUtils.isBlank(customerName)){
 			throw new ParamException("请选择客户经理");
-		}
+		}*/
+		AssertUtil.notEmpty(customerName, "请选择客户经理");
 		Integer cgjl=saleChance.getCgjl();
 		if(cgjl==null||cgjl<1){
 			throw new ParamException("请输入成功几率");
@@ -93,9 +95,10 @@ public class SaleChanceService {
 	 * @param ids 多个以逗号分隔 1,2
 	 */
 	public void delete(String ids) {
-		if (StringUtils.isBlank(ids)) {
+		/*if (StringUtils.isBlank(ids)) {
 			throw new ParamException("请选择要删除的记录");
-		}
+		}*/
+		AssertUtil.notEmpty(ids, "请选择要删除的记录");
 		saleChanceDao.deleteBatch(ids);
 	}
 

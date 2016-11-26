@@ -1,8 +1,5 @@
 package com.zjl.zjl_crm.model;
 
-import java.io.Serializable;
-import java.util.Date;
-
 import com.zjl.zjl_base.BaseModel;
 
 @SuppressWarnings("serial")

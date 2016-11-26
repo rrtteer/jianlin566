@@ -1,16 +1,16 @@
 package com.zjl.zjl_crm.model;
 
-import java.io.Serializable;
 import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.zjl.zjl_base.BaseModel;
 
 /**
  * 销售机会实体
  * Created by Tony on 2016/8/23.
  */
 @SuppressWarnings("serial")
-public class SaleChance implements Serializable{
+public class SaleChance extends BaseModel{
 
     private Integer id; // 编号
     private String chanceSource; // 机会来源
@@ -27,11 +27,7 @@ public class SaleChance implements Serializable{
     private Date assignTime; // 指派时间
     private Integer state; // 分配状态 0 未分配 1 已分配
     private Integer devResult; // 客户开发状态 0 未开发 1 开发中 2 开发成功 3 开发失败
-    private Integer isValid;
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss", timezone="GMT+8")
-    private Date createDate;
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss", timezone="GMT+8")
-    private Date updateDate;
+ 
 
     public Integer getId() {
         return id;
@@ -145,27 +141,5 @@ public class SaleChance implements Serializable{
 		this.customerId = customerId;
 	}
 
-	public Integer getIsValid() {
-		return isValid;
-	}
-
-	public void setIsValid(Integer isValid) {
-		this.isValid = isValid;
-	}
-
-	public Date getCreateDate() {
-		return createDate;
-	}
-
-	public void setCreateDate(Date createDate) {
-		this.createDate = createDate;
-	}
-
-	public Date getUpdateDate() {
-		return updateDate;
-	}
-
-	public void setUpdateDate(Date updateDate) {
-		this.updateDate = updateDate;
-	}
+	
 }
