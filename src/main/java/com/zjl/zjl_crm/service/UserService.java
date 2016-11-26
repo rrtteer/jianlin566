@@ -13,7 +13,6 @@ import com.zjl.zjl_base.exception.ParamException;
 import com.zjl.zjl_crm.constant.Constant;
 import com.zjl.zjl_crm.dao.UserDao;
 import com.zjl.zjl_crm.model.User;
-import com.zjl.zjl_crm.util.AssertUtil;
 import com.zjl.zjl_crm.util.MD5Util;
 import com.zjl.zjl_crm.util.UserIDBase64;
 import com.zjl.zjl_crm.vo.LoginUserInfo;
@@ -41,7 +40,7 @@ public class UserService {
 			String roleName) {
 		
 		// 基本参数验证
-		/*if (StringUtils.isBlank(userName)) {
+		if (StringUtils.isBlank(userName)) {
 			throw new ParamException("请输入用户名");
 		}
 		if (StringUtils.isBlank(password)) {
@@ -49,18 +48,14 @@ public class UserService {
 		}
 		if (StringUtils.isBlank(roleName)) {
 			throw new ParamException("请选择用户类型");
-		}*/
-		AssertUtil.notEmpty(userName, "请输入用户名");
-		AssertUtil.notEmpty(password, "请输入密码");
-		AssertUtil.notEmpty(roleName, "请选择用户类型");
+		}
 		// 用户是否存在
 		password = MD5Util.md5Method(password); // md5加密
 		User user = userDao.findUserByUserNamePwdRole(userName.trim(),
 				password, roleName.trim());
-		/*if (user == null) {
+		if (user == null) {
 			throw new ParamException("用户名或密码错误.");
-		}*/
-		AssertUtil.notNull(user, "用户名或密码错误");
+		}
 		
 		// 封装返回对象
 		UserLoginIdentity userLoginIdentity = new UserLoginIdentity();
@@ -142,10 +137,18 @@ public class UserService {
 	 */
 	private static void checkUptPwdParams(String oldPassword, 
 			String newPassword, String confirmPassword) {
-		AssertUtil.notEmpty(oldPassword, "请输入旧密码");
-		AssertUtil.notEmpty(newPassword, "请输入新密码");
-		AssertUtil.notEmpty(confirmPassword, "请输入确认密码");
-		AssertUtil.isTrue(!confirmPassword.equals(newPassword), "确认密码不一致");
+		if (StringUtils.isBlank(oldPassword)) {
+			throw new ParamException("请输入旧密码");
+		}
+		if (StringUtils.isBlank(newPassword)) {
+			throw new ParamException("请输入新密码");
+		}
+		if (StringUtils.isBlank(confirmPassword)) {
+			throw new ParamException("请输入确认密码");
+		}
+		if (!confirmPassword.equals(newPassword)) {
+			throw new ParamException("确认密码不一致");
+		}
 	}
 
 
