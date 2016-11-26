@@ -3,8 +3,10 @@ package com.zjl.zjl_crm.model;
 import java.io.Serializable;
 import java.util.Date;
 
+import com.zjl.zjl_base.BaseModel;
+
 @SuppressWarnings("serial")
-public class User implements Serializable {
+public class User extends BaseModel {
 	
 	private Integer id;
 	private String userName;
@@ -13,9 +15,7 @@ public class User implements Serializable {
 	private String email;
 	private String phone;
 	private String roleName;
-	private Integer isValid;
-	private Date createDate;
-	private Date updateDate;
+	
 	public Integer getId() {
 		return id;
 	}
@@ -58,22 +58,5 @@ public class User implements Serializable {
 	public void setRoleName(String roleName) {
 		this.roleName = roleName;
 	}
-	public Integer getIsValid() {
-		return isValid;
-	}
-	public void setIsValid(Integer isValid) {
-		this.isValid = isValid;
-	}
-	public Date getCreateDate() {
-		return createDate;
-	}
-	public void setCreateDate(Date createDate) {
-		this.createDate = createDate;
-	}
-	public Date getUpdateDate() {
-		return updateDate;
-	}
-	public void setUpdateDate(Date updateDate) {
-		this.updateDate = updateDate;
-	}
+	
 }

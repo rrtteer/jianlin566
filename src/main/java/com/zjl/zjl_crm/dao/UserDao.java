@@ -5,9 +5,10 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
+import com.zjl.zjl_base.BaseDao;
 import com.zjl.zjl_crm.model.User;
 
-public interface UserDao {
+public interface UserDao extends BaseDao<User>{
 
 	public List<User> listAll();
 	

@@ -39,22 +39,26 @@ public class SaleChanceController {
 	@RequestMapping("add_or_update")
 	@ResponseBody
 	public ResultInfo addOrUpdate(SaleChance saleChance){
-		try {
+		/*try {
 			saleChanceService.addOrUpdate(saleChance);
 			return new ResultInfo(Constant.OPT_SUCCESS);
 		} catch (ParamException e) {
 			return new ResultInfo(e.getMessage());
-		}
+		}*/
+		saleChanceService.addOrUpdate(saleChance);
+		return new ResultInfo(Constant.OPT_SUCCESS);
 	}
 	@RequestMapping("delete")
 	@ResponseBody
 	public ResultInfo delete(String ids){
-		try {
+		/*try {
 			saleChanceService.delete(ids);
 			return new ResultInfo(Constant.OPT_SUCCESS);
 		} catch (ParamException e) {
 			return new ResultInfo(e.getMessage());
-		}
+		}*/
+		saleChanceService.delete(ids);
+		return new ResultInfo(Constant.OPT_SUCCESS);
 	}
 	
 }
