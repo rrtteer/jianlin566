@@ -56,7 +56,7 @@ public class SaleChanceService {
 		if(customerId==null||customerId<1){
 			throw new ParamException("请选择客户");
 		}
-		String customerName=saleChance.getCustomerName();	
+		String customerName=saleChance.getCustomerName();
 		/*if(StringUtils.isBlank(customerName)){
 			throw new ParamException("请选择客户经理");
 		}*/
