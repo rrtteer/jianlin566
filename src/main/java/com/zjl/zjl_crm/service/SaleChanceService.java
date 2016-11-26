@@ -1,5 +1,6 @@
 package com.zjl.zjl_crm.service;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,6 +13,8 @@ import com.github.miemiedev.mybatis.paginator.domain.Order;
 import com.github.miemiedev.mybatis.paginator.domain.PageBounds;
 import com.github.miemiedev.mybatis.paginator.domain.PageList;
 import com.zjl.zjl_base.exception.ParamException;
+import com.zjl.zjl_crm.constant.SaleChanceDevResult;
+import com.zjl.zjl_crm.constant.SaleChanceState;
 import com.zjl.zjl_crm.dao.SaleChanceDao;
 import com.zjl.zjl_crm.model.SaleChance;
 import com.zjl.zjl_crm.query.SaleChanceQuery;
@@ -52,7 +55,7 @@ public class SaleChanceService {
 		if(customerId==null||customerId<1){
 			throw new ParamException("请选择客户");
 		}
-		String customerName=saleChance.getCustomerName();
+		String customerName=saleChance.getCustomerName();	
 		if(StringUtils.isBlank(customerName)){
 			throw new ParamException("请选择客户经理");
 		}
@@ -62,19 +65,39 @@ public class SaleChanceService {
 		}
 		Integer id=saleChance.getId();
 		if(id==null||id<1){
-			
+			String assginMan = saleChance.getAssignMan();
+			if (!StringUtils.isBlank(assginMan)) { // 如果是已经分配好的
+				saleChance.setAssignTime(new Date());
+				saleChance.setState(SaleChanceState.ASSIGN.getType());
+			} else {
+				saleChance.setState(SaleChanceState.UN_ASSIGN.getType());
+			}
+			saleChance.setDevResult(SaleChanceDevResult.UN_DEVELOPE.getType());
+			saleChance.setCreateDate(new Date());
+			saleChance.setUpdateDate(new Date());
+			saleChanceDao.insert(saleChance);
 		}else{
-			
+			String assginMan = saleChance.getAssignMan();
+			if (!StringUtils.isBlank(assginMan)) { // 如果是已经分配好的
+				saleChance.setAssignTime(new Date());
+				saleChance.setState(SaleChanceState.ASSIGN.getType());
+			}
+			saleChance.setUpdateDate(new Date());
+			saleChanceDao.update(saleChance);
 		}
 	}
 
 
-
+	/**
+	 * 删除 delete * from 表 where id in (1, 2)
+	 * @param ids 多个以逗号分隔 1,2
+	 */
 	public void delete(String ids) {
-		// TODO Auto-generated method stub
-		
+		if (StringUtils.isBlank(ids)) {
+			throw new ParamException("请选择要删除的记录");
+		}
+		saleChanceDao.deleteBatch(ids);
 	}
-
 
 	
 	
