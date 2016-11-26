@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zjl.zjl_crm.dao.UserDao" >
+	
+	<sql id="User_Columns">
+		id, userName, password, trueName, email, phone, roleName, isValid, 
+		CreateDate, UpdateDate
+	</sql>
+	
+	<select id="listAll" resultType="User" >
+		select * from t_user
+	</select>
+	
+	<select id="findUserByUserNamePwdRole" resultType="user" >
+		select 
+			<include refid="User_Columns" /> 
+		from t_user
+		where userName = #{userName} 
+			and roleName = #{roleName} 
+			and password = #{password}
+			and isValid = 1
+		
+	</select>
+	
+	<select id="loadById" resultType="user" >
+		select 
+			<include refid="User_Columns" /> 
+		from t_user
+		where id = #{userId}
+		
+	</select>
+	
+	<update id="updatePassword" >
+		update t_user set password = #{password} where id = #{userId}
+	</update>
+	
+</mapper>

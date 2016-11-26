@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zjl.zjl_crm.dao.SaleChanceDao" >
+	
+	 <sql id="SaleChance_Columns">
+       id, chanceSource, customerId, customerName, cgjl, overview, linkMan, linkPhone, description, createMan,
+       assignMan, assignTime, state, devResult, isValid, CreateDate, UpdateDate
+     </sql>
+     
+     <select id="selectForPage" resultType="SaleChance" >
+	        SELECT
+	          <include refid="SaleChance_Columns" />
+	        FROM
+	          t_sale_chance
+	        <where>
+	            isValid = 1
+	            <if test="@Ognl@isNotEmpty(customerName)" >
+	                AND customerName LIKE '%${customerName}%'
+	            </if>
+	            <if test="@Ognl@isNotEmpty(overview)" >
+	                AND overview LIKE '%${overview}%'
+	            </if>
+	            <if test="@Ognl@isNotEmpty(createMan)" >
+	                AND createMan LIKE '%${createMan}%'
+	            </if>
+	            <if test="@Ognl@isNotEmpty(state)" >
+	                AND state = #{state}
+	            </if>
+	            <if test="@Ognl@isNotEmpty(devResult)" >
+	                AND devResult = #{devResult}
+	            </if>
+	        </where>
+	
+	    </select>
+	
+</mapper>
